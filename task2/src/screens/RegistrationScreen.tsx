@@ -9,7 +9,6 @@ import {
   Platform,
   ScrollView,
   Keyboard,
-  TouchableWithoutFeedback,
 } from 'react-native';
 
 export default function RegistrationScreen() {
@@ -36,13 +35,15 @@ export default function RegistrationScreen() {
   const isDisabled = !form.email || !form.password || errors.email !== '';
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <KeyboardAvoidingView
-        style={styles.container}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}
+    >
+      <ScrollView
+        contentContainerStyle={styles.scrollContent}
+        keyboardShouldPersistTaps="handled"
       >
-        <ScrollView contentContainerStyle={styles.scrollContent}>
           <View style={styles.headerArea}>
             <Text style={styles.title}>Welcome Abroad</Text>
             <Text style={styles.subtitle}>Enter your details to register</Text>
@@ -97,9 +98,8 @@ export default function RegistrationScreen() {
           >
             <Text style={styles.btnText}>Create Account</Text>
           </TouchableOpacity>
-        </ScrollView>
-      </KeyboardAvoidingView>
-    </TouchableWithoutFeedback>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 
